@@ -261,3 +261,9 @@ main p{margin-bottom:10px}main li{margin-bottom:3px}main h2{margin-bottom:14px}m
 /* Keep the rightmost contact list within the screen. */
 .nav-contact .nav-dropdown-menu{left:auto;right:0;min-width:230px}
 @media(max-width:850px){.site-nav .nav-contact .nav-dropdown-menu{min-width:0;width:100%}}
+
+/* Surface CampaignIQ before the independent project categories. */
+.featured-iq{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 24px;margin:0 0 30px;background:#fff;border:1px solid #d9dedf;border-radius:4px}
+.featured-iq>div{min-width:0}.featured-iq h3{font:400 28px/1.4 Gotu,Arial,sans-serif;letter-spacing:-.7px;margin:0 0 8px}.featured-iq p{margin:0;max-width:760px}.featured-iq .home-iq-button{margin:0;align-self:center;white-space:nowrap;flex-shrink:0}
+#professional-work{scroll-margin-top:84px}
+@media(max-width:700px){.featured-iq{flex-direction:column;align-items:flex-start;gap:16px;padding:20px;margin-bottom:26px}.featured-iq h3{font-size:25px}.featured-iq .home-iq-button{align-self:flex-start;white-space:normal}}
