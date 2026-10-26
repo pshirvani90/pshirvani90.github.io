@@ -257,3 +257,7 @@ main p{margin-bottom:10px}main li{margin-bottom:3px}main h2{margin-bottom:14px}m
 }
 
 @media(max-width:850px){.site-nav .nav-groups>*,.site-nav .nav-groups.has-home>*{flex-shrink:0;width:100%}}
+
+/* Keep the rightmost contact list within the screen. */
+.nav-contact .nav-dropdown-menu{left:auto;right:0;min-width:230px}
+@media(max-width:850px){.site-nav .nav-contact .nav-dropdown-menu{min-width:0;width:100%}}
