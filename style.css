@@ -267,3 +267,14 @@ main p{margin-bottom:10px}main li{margin-bottom:3px}main h2{margin-bottom:14px}m
 .featured-iq>div{min-width:0}.featured-iq h3{font:400 28px/1.4 Gotu,Arial,sans-serif;letter-spacing:-.7px;margin:0 0 8px}.featured-iq p{margin:0;max-width:760px}.featured-iq .home-iq-button{margin:0;align-self:center;white-space:nowrap;flex-shrink:0}
 #professional-work{scroll-margin-top:84px}
 @media(max-width:700px){.featured-iq{flex-direction:column;align-items:flex-start;gap:16px;padding:20px;margin-bottom:26px}.featured-iq h3{font-size:25px}.featured-iq .home-iq-button{align-self:flex-start;white-space:normal}}
+
+/* Experience metrics: six complementary dimensions, below About Me. */
+.experience-snapshot{background:#f4f5f1}
+.experience-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 40px}
+.experience-grid article{border-top:1px solid #a5b4ab;padding:18px 0 4px;min-width:0}
+.experience-number{display:block;font:400 44px/1.2 Gotu,Arial,sans-serif;color:#66816c;margin-bottom:10px}
+.experience-grid h3{font:400 21px/1.45 Gotu,Arial,sans-serif;margin:0 0 10px}
+.experience-grid p{max-width:48ch;margin:0;font-size:14.5px;line-height:1.55}
+.experience-grid .experience-detail{margin-top:8px;color:#647267;font-size:13px}
+@media(max-width:850px){.experience-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.experience-grid h3{font-size:19px}}
+@media(max-width:480px){.experience-grid{grid-template-columns:1fr;gap:20px}.experience-number{font-size:38px}}
