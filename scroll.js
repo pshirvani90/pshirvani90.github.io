@@ -135,12 +135,6 @@
  links.forEach(link => {
    link.setAttribute('aria-haspopup','dialog');
    if(link.classList.contains('view')) link.textContent = 'Preview Case →';
-   link.addEventListener('pointerenter',event => {
-     if (!hoverDevice.matches || event.pointerType === 'touch' || (dialog.open && !hoverMode)) return;
-     clearTimers();
-     openTimer = setTimeout(() => openPreview(link,true),500);
-   });
-   link.addEventListener('pointerleave',() => { dismissed = undefined; scheduleClose(); });
    link.addEventListener('click',event => {
      if(event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
      const url = new URL(link.href,location.href);
@@ -149,6 +143,20 @@
      dismissed = undefined;
      openPreview(link);
    });
+ });
+ const cards = new Map();
+ links.forEach(link => {
+   const card = previewCard(link);
+   if (card && !cards.has(card)) cards.set(card,link);
+ });
+ cards.forEach((link,card) => {
+   card.classList.add('preview-enabled');
+   card.addEventListener('pointerenter',event => {
+     if (!hoverDevice.matches || event.pointerType === 'touch' || (dialog.open && !hoverMode)) return;
+     clearTimers();
+     openTimer = setTimeout(() => openPreview(link,true),500);
+   });
+   card.addEventListener('pointerleave',() => { dismissed = undefined; scheduleClose(); });
  });
 })();
 
