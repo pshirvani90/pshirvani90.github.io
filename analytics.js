@@ -87,7 +87,11 @@
       recent.set(name, Date.now());
       track(name, {link_placement:placement});
     });
-    document.addEventListener('portfolio:preview', event => track('case_preview', {case_name:event.detail.caseName}));
+    document.addEventListener('portfolio:preview', event => {
+      const label = event.detail.caseName.replace(/^HENKEL\s*\|\s*/i, '');
+      const caseName = Object.values(caseNames).find(name => name.toLowerCase() === label.toLowerCase()) || label;
+      track('case_preview', {case_name:caseName});
+    });
     const sections = {
       about:'About', 'professional-work':'Professional Experience', projects:'Independent Projects',
       capabilities:'Capabilities', 'brand-planning':'Pril Strategy', 'annual-social-strategy':'Pril Annual Social Strategy',
