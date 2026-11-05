@@ -287,3 +287,22 @@ main p{margin-bottom:10px}main li{margin-bottom:3px}main h2{margin-bottom:14px}m
 .experience-duration{display:inline-block;color:#486451;font-size:11px;white-space:nowrap}
 @media(max-width:1100px){.experience-grid{grid-template-columns:repeat(4,220px) repeat(2,250px);overflow-x:auto;padding-bottom:14px;scroll-snap-type:x proximity}.experience-grid article{scroll-snap-align:start}}
 @media(max-width:480px){.experience-number{font-size:38px}}
+
+/* Professional case studies: annual planning and program design. */
+.brand-planning{background:#f4f5f1;scroll-margin-top:100px}
+.brand-planning-intro{max-width:1000px;margin-bottom:28px}
+.brand-planning-intro .eyebrow{margin:0 0 12px;color:#596f60}
+.brand-planning-intro h2{margin:0 0 18px}
+.brand-planning-intro p:last-child{margin-bottom:0}
+.brand-planning-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.brand-planning-grid article{border-top:1px solid #a5b4ab;padding-top:20px;min-width:0}
+.brand-planning-grid h3{font:400 24px/1.5 Gotu,Arial,sans-serif;margin:0 0 16px;color:#243548}
+.brand-planning-grid .brand-planning-label{font-size:12px;font-weight:600;letter-spacing:1px;line-height:1.5;color:#596f60;margin:0 0 12px}
+.brand-planning-grid ul{padding-left:20px;margin-bottom:0}
+.brand-planning-grid li+li{margin-top:8px}
+.brand-planning-link{display:flex;justify-content:space-between;gap:30px;align-items:center;border-top:1px solid #cbd4ca;margin-top:30px;padding-top:24px}
+.brand-planning-link h3{font:400 23px/1.5 Gotu,Arial,sans-serif;margin:0 0 10px}
+.brand-planning-link p{margin:0;max-width:75ch}
+.brand-planning-link .view{flex-shrink:0;align-self:center;margin:0}
+.brand-planning-output{border-top:1px solid #cbd4ca;padding-top:22px;margin:28px 0 0}
+@media(max-width:750px){.brand-planning-grid{grid-template-columns:1fr;gap:26px}.brand-planning-link{flex-direction:column;align-items:flex-start;gap:16px}.brand-planning-link .view{align-self:flex-start}.brand-planning-grid h3{font-size:21px}}
