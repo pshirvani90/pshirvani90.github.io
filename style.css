@@ -324,3 +324,11 @@ main p{margin-bottom:10px}main li{margin-bottom:3px}main h2{margin-bottom:14px}m
 .analytics-owner-notice{position:fixed;z-index:10000;left:16px;right:16px;bottom:16px;max-width:740px;margin:auto;padding:14px 18px;border:1px solid #a5b4ab;border-radius:8px;background:#f4f5f1;color:#243548;font:14px/1.5 Arial,sans-serif;box-shadow:0 4px 20px #0002}
 .analytics-owner-notice a{color:#243548;text-decoration:underline}
 @media(max-width:650px){.case-preview-dialog{width:96vw;max-width:96vw;height:90vh;max-height:90vh;border-radius:10px}.case-preview-toolbar{padding:10px 12px;gap:10px}.case-preview-toolbar h2{font-size:15px}.case-preview-toolbar>div{gap:6px}.case-preview-full{font-size:12px;white-space:normal}.case-preview-close{font-size:28px}}
+
+/* Hover previews sit beside the card without blocking the portfolio. */
+.case-preview-dialog.case-preview-hover{position:fixed;inset:auto;margin:0;max-width:calc(100vw - 32px);max-height:calc(100vh - 48px);z-index:5000;box-shadow:0 14px 55px #152a3b40;border-radius:12px}
+.case-preview-hover .case-preview-toolbar{padding:10px 12px;gap:12px}
+.case-preview-hover .case-preview-toolbar h2{font-size:14px}
+.case-preview-hover .case-preview-toolbar>div{gap:8px}
+.case-preview-hover .case-preview-full{font-size:12px}
+.case-preview-hover .case-preview-close{font-size:24px;min-width:36px;min-height:36px}

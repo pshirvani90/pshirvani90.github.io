@@ -17,11 +17,12 @@
   });
 })();
 
-// Preview professional case studies without leaving the project overview.
+// Desktop hover previews; click or tap opens a larger, focused quick view.
 (() => {
  if (window.self !== window.top) return;
  const links = document.querySelectorAll('.work-card h3 a, .work-card a.view');
  if (!links.length || typeof HTMLDialogElement === 'undefined') return;
+ const hoverDevice = matchMedia('(hover:hover) and (pointer:fine) and (min-width:900px)');
  const dialog = document.createElement('dialog');
  dialog.className = 'case-preview-dialog';
  dialog.setAttribute('aria-labelledby','case-preview-title');
@@ -32,24 +33,78 @@
  const title = dialog.querySelector('h2');
  const full = dialog.querySelector('.case-preview-full');
  const close = dialog.querySelector('button');
- let trigger;
+ let trigger, hoverMode = false, openTimer, closeTimer, activeUrl = '', dismissed;
+ const clearTimers = () => { clearTimeout(openTimer); clearTimeout(closeTimer); };
  const resize = () => {
    const width = viewport.clientWidth;
    if (!width) return;
-   const canvas = width < 650 ? width : 1200;
+   const canvas = hoverMode ? 1200 : width < 650 ? width : 1200;
    const scale = width / canvas;
    frame.style.width = canvas + 'px';
    frame.style.height = Math.ceil(viewport.clientHeight / scale) + 'px';
    frame.style.transform = 'scale(' + scale + ')';
  };
- const stop = () => dialog.close();
+ const positionHover = link => {
+   const rect = link.closest('.work-card').getBoundingClientRect();
+   const width = Math.min(560, innerWidth - 32);
+   const height = Math.min(570, innerHeight - 48);
+   let left = rect.right + 16;
+   if (left + width > innerWidth - 16) left = rect.left - width - 16;
+   left = Math.max(16,Math.min(left,innerWidth - width - 16));
+   const top = Math.max(16,Math.min(rect.top,innerHeight - height - 16));
+   Object.assign(dialog.style,{left:left+'px',top:top+'px',width:width+'px',height:height+'px'});
+ };
+ const stop = () => { clearTimers(); dismissed = trigger; dialog.close(); };
+ const scheduleClose = () => {
+   clearTimeout(openTimer);
+   if (hoverMode) closeTimer = setTimeout(stop,350);
+ };
  close.addEventListener('click',stop);
- dialog.addEventListener('click',event => { if(event.target === dialog) stop(); });
+ dialog.addEventListener('click',event => { if(event.target === dialog && !hoverMode) stop(); });
+ dialog.addEventListener('pointerenter',() => clearTimeout(closeTimer));
+ dialog.addEventListener('pointerleave',scheduleClose);
  dialog.addEventListener('close',() => {
+   if (dialog.open) return;
    frame.src = 'about:blank';
+   activeUrl = '';
    document.documentElement.classList.remove('case-preview-open');
-   trigger?.focus();
+   if (!hoverMode) trigger?.focus();
+   hoverMode = false;
  });
+ document.addEventListener('keydown',event => { if(event.key === 'Escape' && dialog.open && hoverMode) stop(); });
+ const openPreview = (link,hover = false) => {
+   const previousFocus = document.activeElement;
+   const url = new URL(link.href,location.href);
+   if(url.origin !== location.origin || (hover && dismissed === link)) return;
+   clearTimers();
+   const sameCase = dialog.open && activeUrl === url.href;
+   if (sameCase && hoverMode === hover) return;
+   const caseName = link.closest('.work-card').querySelector('h3').textContent.trim();
+   trigger = link;
+   if (dialog.open && hoverMode !== hover) dialog.close();
+   hoverMode = hover;
+   dialog.classList.toggle('case-preview-hover',hover);
+   dialog.style.cssText = '';
+   if (hover) positionHover(link);
+   title.textContent = caseName;
+   full.href = url.href;
+   activeUrl = url.href;
+   url.searchParams.set('preview','1');
+   frame.title = caseName + ' case study preview';
+   if (!sameCase) frame.src = url.href;
+   if (!dialog.open) {
+     if (hover) dialog.show();
+     else dialog.showModal();
+   }
+   document.documentElement.classList.toggle('case-preview-open',!hover);
+   resize();
+   if (!hover) close.focus();
+   else {
+     if (dialog.contains(document.activeElement)) document.activeElement.blur();
+     previousFocus?.focus({preventScroll:true});
+   }
+   if (!sameCase) document.dispatchEvent(new CustomEvent('portfolio:preview',{detail:{caseName}}));
+ };
  window.addEventListener('message',event => {
    if(event.origin !== location.origin || event.source !== frame.contentWindow || !dialog.open) return;
    if(event.data?.type === 'portfolio-preview-close') stop();
@@ -58,27 +113,25 @@
      if(url.origin === location.origin) location.assign(url.href);
    }
  });
+ window.addEventListener('scroll',() => { if(dialog.open && hoverMode) stop(); },{passive:true});
+ window.addEventListener('resize',() => { if(dialog.open && hoverMode) stop(); });
  new ResizeObserver(resize).observe(viewport);
  links.forEach(link => {
    link.setAttribute('aria-haspopup','dialog');
    if(link.classList.contains('view')) link.textContent = 'Preview Case →';
+   link.addEventListener('pointerenter',event => {
+     if (!hoverDevice.matches || event.pointerType === 'touch' || (dialog.open && !hoverMode)) return;
+     clearTimers();
+     openTimer = setTimeout(() => openPreview(link,true),500);
+   });
+   link.addEventListener('pointerleave',() => { dismissed = undefined; scheduleClose(); });
    link.addEventListener('click',event => {
      if(event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
      const url = new URL(link.href,location.href);
      if(url.origin !== location.origin) return;
      event.preventDefault();
-     trigger = link;
-     const caseName = link.closest('.work-card').querySelector('h3').textContent.trim();
-     title.textContent = caseName;
-     full.href = url.href;
-     url.searchParams.set('preview','1');
-     frame.title = caseName + ' case study preview';
-     frame.src = url.href;
-     dialog.showModal();
-     document.documentElement.classList.add('case-preview-open');
-     resize();
-     close.focus();
-     document.dispatchEvent(new CustomEvent('portfolio:preview',{detail:{caseName}}));
+     dismissed = undefined;
+     openPreview(link);
    });
  });
 })();
