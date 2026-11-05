@@ -17,6 +17,72 @@
   });
 })();
 
+// Preview professional case studies without leaving the project overview.
+(() => {
+ if (window.self !== window.top) return;
+ const links = document.querySelectorAll('.work-card h3 a, .work-card a.view');
+ if (!links.length || typeof HTMLDialogElement === 'undefined') return;
+ const dialog = document.createElement('dialog');
+ dialog.className = 'case-preview-dialog';
+ dialog.setAttribute('aria-labelledby','case-preview-title');
+ dialog.innerHTML = '<div class="case-preview-toolbar"><h2 id="case-preview-title"></h2><div><a class="case-preview-full">Open full case study <span aria-hidden="true">↗</span></a><button type="button" class="case-preview-close" aria-label="Close preview">×</button></div></div><div class="case-preview-viewport"><iframe title="Case study preview" allow="autoplay; fullscreen" loading="eager"></iframe></div>';
+ document.body.append(dialog);
+ const frame = dialog.querySelector('iframe');
+ const viewport = dialog.querySelector('.case-preview-viewport');
+ const title = dialog.querySelector('h2');
+ const full = dialog.querySelector('.case-preview-full');
+ const close = dialog.querySelector('button');
+ let trigger;
+ const resize = () => {
+   const width = viewport.clientWidth;
+   if (!width) return;
+   const canvas = width < 650 ? width : 1200;
+   const scale = width / canvas;
+   frame.style.width = canvas + 'px';
+   frame.style.height = Math.ceil(viewport.clientHeight / scale) + 'px';
+   frame.style.transform = 'scale(' + scale + ')';
+ };
+ const stop = () => dialog.close();
+ close.addEventListener('click',stop);
+ dialog.addEventListener('click',event => { if(event.target === dialog) stop(); });
+ dialog.addEventListener('close',() => {
+   frame.src = 'about:blank';
+   document.documentElement.classList.remove('case-preview-open');
+   trigger?.focus();
+ });
+ window.addEventListener('message',event => {
+   if(event.origin !== location.origin || event.source !== frame.contentWindow || !dialog.open) return;
+   if(event.data?.type === 'portfolio-preview-close') stop();
+   if(event.data?.type === 'portfolio-preview-navigate') {
+     const url = new URL(event.data.path,location.href);
+     if(url.origin === location.origin) location.assign(url.href);
+   }
+ });
+ new ResizeObserver(resize).observe(viewport);
+ links.forEach(link => {
+   link.setAttribute('aria-haspopup','dialog');
+   if(link.classList.contains('view')) link.textContent = 'Preview Case →';
+   link.addEventListener('click',event => {
+     if(event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+     const url = new URL(link.href,location.href);
+     if(url.origin !== location.origin) return;
+     event.preventDefault();
+     trigger = link;
+     const caseName = link.closest('.work-card').querySelector('h3').textContent.trim();
+     title.textContent = caseName;
+     full.href = url.href;
+     url.searchParams.set('preview','1');
+     frame.title = caseName + ' case study preview';
+     frame.src = url.href;
+     dialog.showModal();
+     document.documentElement.classList.add('case-preview-open');
+     resize();
+     close.focus();
+     document.dispatchEvent(new CustomEvent('portfolio:preview',{detail:{caseName}}));
+   });
+ });
+})();
+
 document.querySelectorAll('video[data-clip-start]').forEach(video => {
  const start = Number(video.dataset.clipStart), end = Number(video.dataset.clipEnd);
  const begin = () => { video.currentTime = start; video.play().catch(() => {}); };

@@ -306,3 +306,21 @@ main p{margin-bottom:10px}main li{margin-bottom:3px}main h2{margin-bottom:14px}m
 .brand-planning-link .view{flex-shrink:0;align-self:center;margin:0}
 .brand-planning-output{border-top:1px solid #cbd4ca;padding-top:22px;margin:28px 0 0}
 @media(max-width:750px){.brand-planning-grid{grid-template-columns:1fr;gap:26px}.brand-planning-link{flex-direction:column;align-items:flex-start;gap:16px}.brand-planning-link .view{align-self:flex-start}.brand-planning-grid h3{font-size:21px}}
+
+/* Project quick view and owner analytics controls. */
+.case-preview-dialog{padding:0;border:1px solid #d4ded4;border-radius:14px;background:#fff;color:#243548;width:min(1100px,94vw);max-width:94vw;height:88vh;max-height:88vh;box-shadow:0 20px 80px #152a3b44;overflow:hidden}
+.case-preview-dialog::backdrop{background:#1427379c;backdrop-filter:blur(5px)}
+.case-preview-toolbar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:16px 22px;border-bottom:1px solid #dce3da;background:#f4f5f1}
+.case-preview-toolbar h2{font:400 20px/1.45 Gotu,Arial,sans-serif;margin:0}
+.case-preview-toolbar>div{display:flex;align-items:center;gap:20px}
+.case-preview-full{font-size:14px;color:#243548;white-space:nowrap;text-decoration:underline;text-underline-offset:4px}
+.case-preview-close{border:0;background:transparent;color:#243548;font:400 30px/1 Arial,sans-serif;padding:4px 8px;cursor:pointer;min-width:44px;min-height:44px}
+.case-preview-viewport{position:relative;flex:1;min-height:0;overflow:hidden;background:#fff}
+.case-preview-dialog[open]{display:flex;flex-direction:column}
+.case-preview-viewport iframe{display:block;border:0;transform-origin:top left;background:#fff}
+.case-preview-open{overflow:hidden}
+.preview-embedded .site-nav,.preview-embedded footer,.preview-embedded .case-traversal,.preview-embedded .skip{display:none!important}
+.preview-embedded body{padding-top:0!important}
+.analytics-owner-notice{position:fixed;z-index:10000;left:16px;right:16px;bottom:16px;max-width:740px;margin:auto;padding:14px 18px;border:1px solid #a5b4ab;border-radius:8px;background:#f4f5f1;color:#243548;font:14px/1.5 Arial,sans-serif;box-shadow:0 4px 20px #0002}
+.analytics-owner-notice a{color:#243548;text-decoration:underline}
+@media(max-width:650px){.case-preview-dialog{width:96vw;max-width:96vw;height:90vh;max-height:90vh;border-radius:10px}.case-preview-toolbar{padding:10px 12px;gap:10px}.case-preview-toolbar h2{font-size:15px}.case-preview-toolbar>div{gap:6px}.case-preview-full{font-size:12px;white-space:normal}.case-preview-close{font-size:28px}}
