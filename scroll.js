@@ -20,7 +20,11 @@
 // Desktop hover previews; click or tap opens a larger, focused quick view.
 (() => {
  if (window.self !== window.top) return;
- const links = document.querySelectorAll('.work-card h3 a, .work-card a.view');
+ const links = [...document.querySelectorAll('.work-card h3 a, .work-card a.view, .project-grid h3 a, .featured-iq a.home-iq-button')].filter(link => {
+   const url = new URL(link.href,location.href);
+   return url.origin === location.origin && /\.html$/i.test(url.pathname) && !/\/coming-soon\.html$/i.test(url.pathname);
+ });
+ const previewCard = link => link.closest('.work-card, .project-grid article, .featured-iq');
  if (!links.length || typeof HTMLDialogElement === 'undefined') return;
  const hoverDevice = matchMedia('(hover:hover) and (pointer:fine) and (min-width:900px)');
  const dialog = document.createElement('dialog');
@@ -45,7 +49,7 @@
    frame.style.transform = 'scale(' + scale + ')';
  };
  const positionHover = link => {
-   const card = link.closest('.work-card').getBoundingClientRect();
+   const card = previewCard(link).getBoundingClientRect();
    const anchor = link.getBoundingClientRect();
    const width = Math.min(560, innerWidth - 32);
    let height = Math.min(570, innerHeight - 48);
@@ -91,7 +95,7 @@
    clearTimers();
    const sameCase = dialog.open && activeUrl === url.href;
    if (sameCase && hoverMode === hover) return;
-   const caseName = link.closest('.work-card').querySelector('h3').textContent.trim();
+   const caseName = previewCard(link).querySelector('h3').textContent.trim();
    trigger = link;
    if (dialog.open && hoverMode !== hover) dialog.close();
    hoverMode = hover;
@@ -115,7 +119,7 @@
      if (dialog.contains(document.activeElement)) document.activeElement.blur();
      previousFocus?.focus({preventScroll:true});
    }
-   if (!sameCase) document.dispatchEvent(new CustomEvent('portfolio:preview',{detail:{caseName}}));
+   if (!sameCase) document.dispatchEvent(new CustomEvent('portfolio:preview',{detail:{caseName,casePath:url.pathname.split('/').pop()}}));
  };
  window.addEventListener('message',event => {
    if(event.origin !== location.origin || event.source !== frame.contentWindow || !dialog.open) return;
