@@ -268,23 +268,22 @@ main p{margin-bottom:10px}main li{margin-bottom:3px}main h2{margin-bottom:14px}m
 #professional-work{scroll-margin-top:84px}
 @media(max-width:700px){.featured-iq{flex-direction:column;align-items:flex-start;gap:16px;padding:20px;margin-bottom:26px}.featured-iq h3{font-size:25px}.featured-iq .home-iq-button{align-self:flex-start;white-space:normal}}
 
-/* Experience metrics: six complementary dimensions, below About Me. */
+/* One row of experience metrics and strategic project highlights. */
 .experience-snapshot{background:#f4f5f1}
-.experience-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 40px}
-.experience-grid article{border-top:1px solid #a5b4ab;padding:18px 0 4px;min-width:0}
-.experience-number{display:block;font:400 44px/1.2 Gotu,Arial,sans-serif;color:#66816c;margin-bottom:10px}
-.experience-grid h3{font:400 21px/1.45 Gotu,Arial,sans-serif;margin:0 0 10px}
-.experience-grid p{max-width:48ch;margin:0;font-size:14.5px;line-height:1.55}
-.experience-grid .experience-detail{margin-top:8px;color:#647267;font-size:13px}
-@media(max-width:850px){.experience-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.experience-grid h3{font-size:19px}}
-@media(max-width:480px){.experience-grid{grid-template-columns:1fr;gap:20px}.experience-number{font-size:38px}}
-
-/* Keep all six experience highlights in one horizontal row. */
-.experience-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:24px}
-.experience-grid h3{font-size:18px;line-height:1.45}
-.experience-grid p{font-size:13px;line-height:1.55}
-@media(max-width:1100px){.experience-grid{grid-template-columns:repeat(6,220px);overflow-x:auto;gap:24px;padding-bottom:14px;scroll-snap-type:x proximity}.experience-grid article{scroll-snap-align:start}}
-
-/* Emphasize strategic scope alongside the four numeric highlights. */
-.experience-grid .experience-program h3{font-size:23px;line-height:1.4;color:#486451;margin:0 0 16px}
-.experience-grid .experience-scope{margin-top:14px}
+.experience-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) repeat(2,minmax(0,1.15fr));gap:20px;align-items:stretch}
+.experience-grid article{min-width:0}
+.experience-grid .experience-metric{border-top:1px solid #a5b4ab;padding:18px 0 6px;display:grid;grid-template-rows:auto minmax(52px,auto) minmax(64px,auto) 1fr;align-content:start}
+.experience-number{display:block;font:400 44px/1.2 Gotu,Arial,sans-serif;color:#66816c;margin-bottom:12px}
+.experience-grid h3{font:400 18px/1.45 Gotu,Arial,sans-serif;margin:0 0 12px}
+.experience-grid p{margin:0;font-size:13px;line-height:1.6}
+.experience-grid .experience-detail{color:#596b60;font-size:13px;line-height:1.65}
+.experience-grid .experience-category{padding-bottom:14px}
+.experience-grid .experience-program{background:#e9eee7;border:1px solid #d8e1d5;border-radius:10px;padding:18px 16px}
+.experience-eyebrow{display:block;color:#596f60;font-size:10px;line-height:1.5;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:14px}
+.experience-grid .experience-program h3{font-size:20px;line-height:1.4;color:#36513e;margin:0 0 16px}
+.experience-grid .experience-client{font-weight:600;margin-bottom:10px}
+.experience-scope+.experience-scope{border-top:1px solid #ced9ca;padding-top:14px;margin-top:14px}
+.experience-grid .experience-scope h4{font:600 13px/1.5 Arial,sans-serif;margin:0 0 6px;color:#243548;letter-spacing:0;text-transform:none}
+.experience-duration{display:inline-block;color:#486451;font-size:11px;white-space:nowrap}
+@media(max-width:1100px){.experience-grid{grid-template-columns:repeat(4,220px) repeat(2,250px);overflow-x:auto;padding-bottom:14px;scroll-snap-type:x proximity}.experience-grid article{scroll-snap-align:start}}
+@media(max-width:480px){.experience-number{font-size:38px}}
