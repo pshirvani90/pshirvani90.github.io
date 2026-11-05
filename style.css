@@ -272,7 +272,7 @@ main p{margin-bottom:10px}main li{margin-bottom:3px}main h2{margin-bottom:14px}m
 .experience-snapshot{background:#f4f5f1}
 .experience-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) repeat(2,minmax(0,1.15fr));gap:20px;align-items:stretch}
 .experience-grid article{min-width:0}
-.experience-grid .experience-metric{border-top:1px solid #a5b4ab;padding:18px 0 6px;display:grid;grid-template-rows:auto minmax(52px,auto) minmax(64px,auto) 1fr;align-content:start}
+.experience-grid .experience-metric{border-top:1px solid #a5b4ab;padding:18px 0 6px;display:grid;grid-template-rows:65px 52px 78px 1fr;align-content:start}
 .experience-number{display:block;font:400 44px/1.2 Gotu,Arial,sans-serif;color:#66816c;margin-bottom:12px}
 .experience-grid h3{font:400 18px/1.45 Gotu,Arial,sans-serif;margin:0 0 12px}
 .experience-grid p{margin:0;font-size:13px;line-height:1.6}
