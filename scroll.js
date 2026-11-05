@@ -45,13 +45,25 @@
    frame.style.transform = 'scale(' + scale + ')';
  };
  const positionHover = link => {
-   const rect = link.closest('.work-card').getBoundingClientRect();
+   const card = link.closest('.work-card').getBoundingClientRect();
+   const anchor = link.getBoundingClientRect();
    const width = Math.min(560, innerWidth - 32);
-   const height = Math.min(570, innerHeight - 48);
-   let left = rect.right + 16;
-   if (left + width > innerWidth - 16) left = rect.left - width - 16;
-   left = Math.max(16,Math.min(left,innerWidth - width - 16));
-   const top = Math.max(16,Math.min(rect.top,innerHeight - height - 16));
+   let height = Math.min(570, innerHeight - 48);
+   let left, top;
+   if (innerWidth - card.right - 32 >= width) {
+     left = card.right + 16;
+     top = Math.max(16,Math.min(card.top,innerHeight - height - 16));
+   } else if (card.left - 32 >= width) {
+     left = card.left - width - 16;
+     top = Math.max(16,Math.min(card.top,innerHeight - height - 16));
+   } else {
+     const below = innerHeight - anchor.bottom - 28;
+     const above = anchor.top - 28;
+     const useBelow = below >= 260 || below >= above;
+     height = Math.min(height,Math.max(160,useBelow ? below : above));
+     left = Math.max(16,Math.min(anchor.left,innerWidth - width - 16));
+     top = useBelow ? anchor.bottom + 12 : anchor.top - height - 12;
+   }
    Object.assign(dialog.style,{left:left+'px',top:top+'px',width:width+'px',height:height+'px'});
  };
  const stop = () => { clearTimers(); dismissed = trigger; dialog.close(); };
