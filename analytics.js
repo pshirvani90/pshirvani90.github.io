@@ -77,7 +77,8 @@
       const url = new URL(link.href, location.href);
       const placement = link.closest('.site-nav') ? 'navigation' : link.closest('footer') ? 'footer' : 'content';
       let name;
-      if (url.protocol === 'mailto:') name = 'contact_email';
+      if (link.matches('.home-banner a.home-iq-button') && url.origin === location.origin && url.pathname === location.pathname && url.hash === '#professional-work') name = 'explore_work_click';
+      else if (url.protocol === 'mailto:') name = 'contact_email';
       else if (url.protocol === 'tel:') name = 'contact_phone';
       else if (/(^|\.)linkedin\.com$/.test(url.hostname)) name = 'linkedin_click';
       else if (url.origin === location.origin && url.pathname.startsWith('/campaign-analyzer')) name = 'campaigniq_click';
