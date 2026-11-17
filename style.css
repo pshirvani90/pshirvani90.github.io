@@ -361,3 +361,21 @@ main section.experience-snapshot{padding:24px 4% 26px}
 @media(max-width:1100px){main .home-banner{column-gap:24px}.home-banner h1{font-size:44px}.home-banner .home-iq-button{font-size:14px;padding:14px 18px}main section.introduction{gap:32px;padding-inline:6%}.experience-grid{gap:20px}}
 @media(max-width:850px){.site-nav{padding-block:14px}main .home-banner{display:block;min-height:235px;padding:28px 6%;background-position:65% center}.home-banner h1{font-size:40px;margin-bottom:8px}.home-banner p{font-size:16px}.home-banner .home-iq-button{margin-top:18px;font-size:14px;padding:13px 18px}main section.introduction{grid-template-columns:200px minmax(0,1fr);gap:25px;padding-block:28px}.introduction>img{width:200px;height:300px}.introduction p{font-size:16px;line-height:1.7}}
 @media(max-width:600px){main .home-banner{padding:26px 6%;min-height:235px}.home-banner h1{font-size:36px;letter-spacing:-1px}main section.introduction{grid-template-columns:1fr;gap:20px;padding:26px 6%}.introduction>img{width:220px;height:330px;justify-self:center}.introduction p{font-size:16px;line-height:1.65}main section.experience-snapshot{padding:24px 6%}}
+
+/* Equal-size case cards on the homepage. */
+.professional-work:has(.experience-gallery){background:#f5f6f2}
+.professional-work .experience-gallery-kicker{margin:0 0 5px;color:#466555;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.professional-work .experience-gallery{gap:18px;grid-auto-rows:1fr}
+.experience-gallery .work-card{display:flex;align-items:stretch;border:1px solid #d5ded7;border-radius:6px;overflow:hidden;padding:0;min-width:0}
+.experience-gallery .work-card:has(a):hover{border-color:#466555}
+.experience-gallery-project{display:flex;flex:1;flex-direction:column;color:inherit;text-decoration:none;min-width:0}
+.experience-gallery-project:focus-visible{outline-offset:-4px}
+.experience-gallery-project img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#e3e9e4}
+.experience-gallery-copy{display:flex;flex:1;flex-direction:column;gap:6px;padding:clamp(14px,1.4vw,23px)}
+.experience-gallery .experience-gallery-type{color:#466555;font-size:11px;letter-spacing:.1em;margin:0}
+.experience-gallery .work-card h3{font:400 clamp(20px,1.8vw,27px)/1.25 Georgia,serif;color:var(--ink);margin:0}
+.experience-gallery .experience-gallery-detail{color:#526173;margin:0;font-size:14px;line-height:1.55}
+.experience-gallery-cta{margin-top:auto;padding-top:9px;color:#466555;font-size:14px}
+.experience-gallery-cta span{padding-left:4px}
+.experience-gallery-project:is(:hover,:focus-visible) .experience-gallery-cta{text-decoration:underline;text-underline-offset:4px}
+@media(max-width:540px){.professional-work .experience-gallery{grid-template-columns:1fr}}

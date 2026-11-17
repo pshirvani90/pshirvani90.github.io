@@ -17,10 +17,10 @@
   });
 })();
 
-// Desktop hover previews; click or tap opens a larger, focused quick view.
+// The experience gallery opens cases directly and keeps desktop hover previews.
 (() => {
  if (window.self !== window.top) return;
- const links = [...document.querySelectorAll('.work-card h3 a, .work-card a.view, .project-grid h3 a, .featured-iq a.home-iq-button')].filter(link => {
+ const links = [...document.querySelectorAll('.work-card a.experience-gallery-project, .work-card h3 a, .work-card a.view, .project-grid h3 a, .featured-iq a.home-iq-button')].filter(link => {
    const url = new URL(link.href,location.href);
    return url.origin === location.origin && /\.html$/i.test(url.pathname) && !/\/coming-soon\.html$/i.test(url.pathname);
  });
@@ -133,6 +133,7 @@
  window.addEventListener('resize',() => { if(dialog.open && hoverMode) stop(); });
  new ResizeObserver(resize).observe(viewport);
  links.forEach(link => {
+   if(link.classList.contains('experience-gallery-project')) return;
    link.setAttribute('aria-haspopup','dialog');
    if(link.classList.contains('view')) link.textContent = 'Preview Case →';
    link.addEventListener('click',event => {
