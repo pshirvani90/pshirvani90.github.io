@@ -42,15 +42,36 @@
  const resize = () => {
    const width = viewport.clientWidth;
    if (!width) return;
-   const canvas = hoverMode ? 1200 : width < 650 ? width : 1200;
+   const galleryHover = hoverMode && trigger?.classList.contains('experience-gallery-project');
+   const canvas = galleryHover ? Math.max(850,width) : hoverMode ? 1200 : width < 650 ? width : 1200;
    const scale = width / canvas;
    frame.style.width = canvas + 'px';
    frame.style.height = Math.ceil(viewport.clientHeight / scale) + 'px';
    frame.style.transform = 'scale(' + scale + ')';
  };
- const positionHover = link => {
+ const positionHover = (link,pointerX) => {
    const card = previewCard(link).getBoundingClientRect();
    const anchor = link.getBoundingClientRect();
+   if (link.classList.contains('experience-gallery-project')) {
+     const edge = 16;
+     const gap = 12;
+     const targetWidth = 660;
+     const height = Math.min(620,innerHeight - 2 * edge);
+     const pointer = Math.min(card.right,Math.max(card.left,pointerX ?? (card.left + card.right) / 2));
+     const besideLeft = card.left - edge - gap;
+     const besideRight = innerWidth - edge - gap - card.right;
+     const useRight = Math.max(besideLeft,besideRight) >= targetWidth
+       ? besideRight >= besideLeft
+       : innerWidth - pointer >= pointer;
+     const room = useRight ? innerWidth - edge - gap - pointer : pointer - edge - gap;
+     const width = Math.min(targetWidth,room);
+     const left = useRight
+       ? Math.min(innerWidth - edge - width,card.right + gap)
+       : Math.max(edge,card.left - gap - width);
+     const top = Math.max(edge,Math.min(card.top,innerHeight - height - edge));
+     Object.assign(dialog.style,{left:left+'px',top:top+'px',width:width+'px',height:height+'px',maxHeight:height+'px'});
+     return;
+   }
    const width = Math.min(560, innerWidth - 32);
    let height = Math.min(570, innerHeight - 48);
    let left, top;
@@ -88,7 +109,7 @@
    hoverMode = false;
  });
  document.addEventListener('keydown',event => { if(event.key === 'Escape' && dialog.open && hoverMode) stop(); });
- const openPreview = (link,hover = false) => {
+ const openPreview = (link,hover = false,pointerX) => {
    const previousFocus = document.activeElement;
    const url = new URL(link.href,location.href);
    if(url.origin !== location.origin || (hover && dismissed === link)) return;
@@ -101,7 +122,7 @@
    hoverMode = hover;
    dialog.classList.toggle('case-preview-hover',hover);
    dialog.style.cssText = '';
-   if (hover) positionHover(link);
+   if (hover) positionHover(link,pointerX);
    title.textContent = caseName;
    full.href = url.href;
    activeUrl = url.href;
@@ -151,11 +172,14 @@
    if (card && !cards.has(card)) cards.set(card,link);
  });
  cards.forEach((link,card) => {
+   let pointerX;
    card.classList.add('preview-enabled');
+   card.addEventListener('pointermove',event => { pointerX = event.clientX; },{passive:true});
    card.addEventListener('pointerenter',event => {
      if (!hoverDevice.matches || event.pointerType === 'touch' || (dialog.open && !hoverMode)) return;
+     pointerX = event.clientX;
      clearTimers();
-     openTimer = setTimeout(() => openPreview(link,true),500);
+     openTimer = setTimeout(() => openPreview(link,true,pointerX),500);
    });
    card.addEventListener('pointerleave',() => { dismissed = undefined; scheduleClose(); });
  });
