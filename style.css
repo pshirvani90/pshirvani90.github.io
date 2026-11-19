@@ -417,3 +417,8 @@ main section.experience-snapshot{padding:24px 4% 26px}
 .iq-showcase-preview figcaption{margin-top:7px;font-size:11px}
 @media(max-width:1000px){.featured-iq.featured-iq-showcase{padding:20px;gap:22px}.iq-showcase-preview>a{height:260px}}
 @media(max-width:760px){.featured-iq.featured-iq-showcase{grid-template-columns:1fr;gap:20px}.iq-showcase-preview>a{height:220px}.featured-iq .iq-showcase-tags{margin-bottom:14px}}
+
+/* Reduce the homepage banner height by approximately one eighth. */
+main .home-banner{min-height:197px;padding-block:8px}
+@media(min-width:1700px){main .home-banner{min-height:207px;padding-block:13px}}
+@media(max-width:850px){main .home-banner{min-height:206px;padding-block:13px}}
