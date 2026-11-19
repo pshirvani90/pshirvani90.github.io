@@ -447,3 +447,26 @@ main #professional-work{padding-block:20px}
 .experience-gallery-copy{padding:14px;gap:5px}
 .experience-gallery-cta{padding-top:5px}
 @media(max-width:600px){main #work{padding-block:16px}main #professional-work{padding-block:18px}.experience-gallery-copy{padding:13px}}
+
+/* Tighten the independent project category row without shrinking its text. */
+#projects .project-grid{gap:18px}
+#projects .project-grid article{padding-block:0 12px}
+#projects .project-grid .project-illustration{height:clamp(100px,9vw,155px);margin-bottom:0;aspect-ratio:auto}
+#projects .project-grid h3{line-height:1.4;min-height:4.2em;margin:10px 0}
+#projects .project-grid p{line-height:1.5;margin-bottom:8px}
+#projects .project-grid p:last-child{line-height:1.5;margin-bottom:0}
+@media(max-width:1199px){#projects .project-grid h3{min-height:2.8em}}
+@media(max-width:480px){#projects .project-grid h3{min-height:0}#projects .project-grid .project-illustration{height:135px}}
+
+/* Compact skills and education while keeping the body text readable. */
+main #capabilities{padding-block:20px}
+#capabilities>h2{margin-bottom:16px;line-height:1.25}
+#capabilities article,#capabilities article:first-child,#capabilities article:last-child{padding-top:12px}
+#capabilities .cap-number{font-size:36px;line-height:1.15;margin-bottom:8px}
+#capabilities h3{min-height:0;line-height:1.35;margin-bottom:10px}
+#capabilities ul{line-height:1.5}
+#capabilities li{padding-block:2px;margin-bottom:0}
+main #education{padding-block:20px;gap:24px}
+#education h3{line-height:1.45;margin-bottom:8px}
+#education p{line-height:1.5;margin-bottom:0}
+@media(max-width:600px){main #capabilities,main #education{padding-block:18px}#capabilities .three{gap:16px}#capabilities .cap-number{font-size:30px;margin-bottom:0}#capabilities article:first-child{padding-top:0}}
