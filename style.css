@@ -514,3 +514,9 @@ body:has(.home-banner)>footer h2{font-size:clamp(32px,3vw,40px);letter-spacing:-
 body:has(.home-banner)>footer h2{margin-bottom:16px}
 body:has(.home-banner)>footer h3{margin-top:14px;margin-bottom:10px}
 @media(max-width:600px){.experience-gallery-copy{padding:14px}#capabilities h3{font-size:19px}#tools .tool-grid article:last-child p{min-height:0}}
+
+/* Distinguish professional work from the metrics above and give its intro full width. */
+main #professional-work{background:#fff;border-top:2px solid #c8d3cb;padding-top:22px}
+#professional-work>.section-label{margin-bottom:14px}
+#professional-work>.experience-gallery-intro{max-width:none;width:100%;padding-bottom:16px;border-bottom:1px solid #d9e1db;margin-bottom:18px}
+#professional-work .experience-gallery .work-card{background:#f5f6f2}
