@@ -494,3 +494,23 @@ body:has(.home-banner)>footer h2{font-size:clamp(32px,3vw,40px);letter-spacing:-
 /* Bring education details into proportion with the compact homepage. */
 #education h3{font-size:16px;line-height:1.4}
 #education p{font-size:14px;line-height:1.5}
+
+/* Consistent homepage hierarchy and spacing within the compact layout. */
+#professional-work{position:relative}
+#professional-work>.work-anchor{position:absolute;top:0;left:0;display:block;width:0;height:0;padding:0;scroll-margin-top:58px}
+#professional-work>.section-label,#projects>.section-label,#capabilities>h2,#education>h2,#tools>.section-label{font-size:clamp(24px,2.2vw,32px);line-height:1.3;letter-spacing:-.04em;margin-bottom:20px}
+#professional-work>.section-label{margin-bottom:12px}
+#professional-work>.experience-gallery-intro{font-size:15px;line-height:1.55;color:var(--muted);max-width:78ch;margin:0 0 20px}
+.experience-gallery-copy{gap:8px;padding:16px}
+.experience-gallery .work-card h3{font-size:clamp(20px,1.7vw,24px);line-height:1.3}
+.experience-gallery .experience-gallery-detail{font-size:15px;line-height:1.55}
+#capabilities h3{font-size:20px;line-height:1.35;margin-bottom:14px}
+#capabilities ul{line-height:1.55}
+#projects .project-grid h3{line-height:1.45;margin-bottom:14px}
+#projects .project-grid p:last-child{font-size:13px;line-height:1.55}
+#education h3{margin-bottom:12px}
+#tools .tool-grid h3{margin-bottom:12px;line-height:1.4}
+#tools .tool-grid p{font-size:13px;line-height:1.55;min-height:42px}
+body:has(.home-banner)>footer h2{margin-bottom:16px}
+body:has(.home-banner)>footer h3{margin-top:14px;margin-bottom:10px}
+@media(max-width:600px){.experience-gallery-copy{padding:14px}#capabilities h3{font-size:19px}#tools .tool-grid article:last-child p{min-height:0}}
