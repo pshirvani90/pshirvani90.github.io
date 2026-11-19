@@ -521,5 +521,7 @@ main #professional-work{background:#fff;border-top:2px solid #c8d3cb;padding-top
 #professional-work>.experience-gallery-intro{max-width:none;width:100%;padding-bottom:16px;border-bottom:1px solid #d9e1db;margin-bottom:18px}
 #professional-work .experience-gallery .work-card{background:#f5f6f2}
 
-/* Keep the education label visually secondary to the portfolio sections. */
-#education>h2{font-size:clamp(22px,1.9vw,28px)}
+
+/* Reduce degree and university details while retaining the Education heading. */
+#education h3{font-size:15px}
+#education p{font-size:13px}
