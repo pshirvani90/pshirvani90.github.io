@@ -422,3 +422,11 @@ main section.experience-snapshot{padding:24px 4% 26px}
 main .home-banner{min-height:197px;padding-block:8px}
 @media(min-width:1700px){main .home-banner{min-height:207px;padding-block:13px}}
 @media(max-width:850px){main .home-banner{min-height:206px;padding-block:13px}}
+
+/* A slightly more compact portrait and About Me section. */
+main section.introduction{grid-template-columns:210px minmax(0,1fr);gap:48px;padding-block:22.75px}
+.introduction>img{width:210px;height:315px}
+.introduction p{line-height:1.6;margin-bottom:12.25px}
+.introduction p:last-child{margin-bottom:0}
+@media(max-width:850px){main section.introduction{grid-template-columns:175px minmax(0,1fr);gap:22px;padding-block:24.5px}.introduction>img{width:175px;height:262.5px}}
+@media(max-width:600px){main section.introduction{grid-template-columns:1fr;gap:17.5px;padding-block:22.75px}.introduction>img{width:192.5px;height:288.75px;justify-self:center}}
